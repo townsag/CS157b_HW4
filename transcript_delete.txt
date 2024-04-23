@@ -1,0 +1,243 @@
+(base) andrewtownsend@Andrews-MacBook-Air ~ % pwdd
+zsh: command not found: pwdd
+(base) andrewtownsend@Andrews-MacBook-Air ~ % pwd 
+/Users/andrewtownsend
+(base) andrewtownsend@Andrews-MacBook-Air ~ % cd Desktop/SJSU/CS157b 
+(base) andrewtownsend@Andrews-MacBook-Air CS157b % ls
+CS157B_HW3	CS157b_HW1.zip	foo.sqlite3
+CS157b_HW1	CS157b_HW2	test.db
+(base) andrewtownsend@Andrews-MacBook-Air CS157b % mkdir CS157b_HW4
+(base) andrewtownsend@Andrews-MacBook-Air CS157b % cd CS157b_HW4
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % ls
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % which sqlite3
+/Users/andrewtownsend/miniconda3/bin/sqlite3
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % sqlite3 db.db 
+SQLite version 3.41.2 2023-03-22 11:56:21
+Enter ".help" for usage hints.
+sqlite> .mode table
+sqlite> .headers on
+sqlite> CREATE TABLE foo (
+(x1...> col1 INTEGER
+(x1...> );
+sqlite> SELECT * FROM foo;
+sqlite> .schema
+CREATE TABLE foo (
+col1 INTEGER
+);
+sqlite> PRAGMA journal_mode;
++--------------+
+| journal_mode |
++--------------+
+| delete       |
++--------------+
+sqlite> PRAGMA journal_mode=delete
+   ...> ;
++--------------+
+| journal_mode |
++--------------+
+| delete       |
++--------------+
+sqlite> .exit
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % which python 
+/Users/andrewtownsend/.pyenv/shims/python
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % pyenv which python 
+/Users/andrewtownsend/miniconda3/bin/python
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % conda deactivate  
+andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % pyenv which python 
+/usr/bin/python
+andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % pyenv activate leetcode 
+pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior.
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % pwd    
+/Users/andrewtownsend/Desktop/SJSU/CS157b/CS157b_HW4
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % ls -la
+total 16
+drwxr-xr-x   3 andrewtownsend  staff    96 Apr 12 12:26 .
+drwxr-xr-x@ 10 andrewtownsend  staff   320 Apr 12 12:22 ..
+-rw-r--r--   1 andrewtownsend  staff  8192 Apr 12 12:26 db.db
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % python 
+Python 3.11.6 (main, Dec  5 2023, 17:41:51) [Clang 13.1.6 (clang-1316.0.21.2.5)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sqlite3
+>>> connection = sqlite3.connect("db.db")
+>>> typeof(connection)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+NameError: name 'typeof' is not defined. Did you mean: 'type'?
+>>> type(connection)
+<class 'sqlite3.Connection'>
+>>> cursor = connection.cursor()
+>>> type(cursor)
+<class 'sqlite3.Cursor'>
+>>> sql = "INSERT INTO foo (col1) VALUES "
+>>> for i in range(1, 100+1):
+...     sql += f"({i}), "
+... 
+>>> sql
+'INSERT INTO foo (col1) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12), (13), (14), (15), (16), (17), (18), (19), (20), (21), (22), (23), (24), (25), (26), (27), (28), (29), (30), (31), (32), (33), (34), (35), (36), (37), (38), (39), (40), (41), (42), (43), (44), (45), (46), (47), (48), (49), (50), (51), (52), (53), (54), (55), (56), (57), (58), (59), (60), (61), (62), (63), (64), (65), (66), (67), (68), (69), (70), (71), (72), (73), (74), (75), (76), (77), (78), (79), (80), (81), (82), (83), (84), (85), (86), (87), (88), (89), (90), (91), (92), (93), (94), (95), (96), (97), (98), (99), (100), '
+>>> sql = sql[:-2]
+>>> sql
+'INSERT INTO foo (col1) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12), (13), (14), (15), (16), (17), (18), (19), (20), (21), (22), (23), (24), (25), (26), (27), (28), (29), (30), (31), (32), (33), (34), (35), (36), (37), (38), (39), (40), (41), (42), (43), (44), (45), (46), (47), (48), (49), (50), (51), (52), (53), (54), (55), (56), (57), (58), (59), (60), (61), (62), (63), (64), (65), (66), (67), (68), (69), (70), (71), (72), (73), (74), (75), (76), (77), (78), (79), (80), (81), (82), (83), (84), (85), (86), (87), (88), (89), (90), (91), (92), (93), (94), (95), (96), (97), (98), (99), (100)'
+>>> cursor.execute(sql)
+<sqlite3.Cursor object at 0x1055dfdc0>
+>>> exit()
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % sqlite3 db.db 
+SQLite version 3.36.0 2021-06-18 18:58:49
+Enter ".help" for usage hints.
+sqlite> SELECT * FROM foo LIMIT 10;
+sqlite> .exit
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % python 
+Python 3.11.6 (main, Dec  5 2023, 17:41:51) [Clang 13.1.6 (clang-1316.0.21.2.5)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import sqlite3
+>>> connection = sqlite3.connect("db.db")
+>>> cursor = connection.cursor()
+>>> sql = "INSERT INTO foo (col1) VALUES "
+>>> for i in range(1, 100):
+...     sql += f"({i}), "
+... 
+>>> sql
+'INSERT INTO foo (col1) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12), (13), (14), (15), (16), (17), (18), (19), (20), (21), (22), (23), (24), (25), (26), (27), (28), (29), (30), (31), (32), (33), (34), (35), (36), (37), (38), (39), (40), (41), (42), (43), (44), (45), (46), (47), (48), (49), (50), (51), (52), (53), (54), (55), (56), (57), (58), (59), (60), (61), (62), (63), (64), (65), (66), (67), (68), (69), (70), (71), (72), (73), (74), (75), (76), (77), (78), (79), (80), (81), (82), (83), (84), (85), (86), (87), (88), (89), (90), (91), (92), (93), (94), (95), (96), (97), (98), (99), '
+>>> sql += "(100)"
+>>> sql
+'INSERT INTO foo (col1) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12), (13), (14), (15), (16), (17), (18), (19), (20), (21), (22), (23), (24), (25), (26), (27), (28), (29), (30), (31), (32), (33), (34), (35), (36), (37), (38), (39), (40), (41), (42), (43), (44), (45), (46), (47), (48), (49), (50), (51), (52), (53), (54), (55), (56), (57), (58), (59), (60), (61), (62), (63), (64), (65), (66), (67), (68), (69), (70), (71), (72), (73), (74), (75), (76), (77), (78), (79), (80), (81), (82), (83), (84), (85), (86), (87), (88), (89), (90), (91), (92), (93), (94), (95), (96), (97), (98), (99), (100)'
+>>> cursor.execute(sql)
+<sqlite3.Cursor object at 0x102bf3cc0>
+>>> connection.commit()
+>>> result = cursor.execute("SELECT * FROM foo LIMIT 10");
+>>> result.fetchall()
+[(1,), (2,), (3,), (4,), (5,), (6,), (7,), (8,), (9,), (10,)]
+>>> exit()
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % sqlite3 db.db 
+SQLite version 3.36.0 2021-06-18 18:58:49
+Enter ".help" for usage hints.
+sqlite> .mode table 
+sqlite> SELECT * FROM foo LIMIT 10;
++------+
+| col1 |
++------+
+| 1    |
+| 2    |
+| 3    |
+| 4    |
+| 5    |
+| 6    |
+| 7    |
+| 8    |
+| 9    |
+| 10   |
++------+
+sqlite> .exit 
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % cp db.db db1.sqlite 
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % ls -la
+total 32
+drwxr-xr-x   4 andrewtownsend  staff   128 Apr 12 12:46 .
+drwxr-xr-x@ 10 andrewtownsend  staff   320 Apr 12 12:22 ..
+-rw-r--r--   1 andrewtownsend  staff  8192 Apr 12 12:44 db.db
+-rw-r--r--   1 andrewtownsend  staff  8192 Apr 12 12:46 db1.sqlite
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % sqlite3 db.db 
+SQLite version 3.36.0 2021-06-18 18:58:49
+Enter ".help" for usage hints.
+sqlite> BEGIN TRANSACTION 
+   ...> ;
+sqlite> DELETE FROM foo WHERE col1>50;
+sqlite> SELECT FROM foo LIMIT 10 ORDER BY col1 DESC;
+Error: near "FROM": syntax error
+sqlite> SELECT * FROM foo LIMIT 10 ORDER BY col1 DESC;
+Error: near "ORDER": syntax error
+sqlite> sqlite> SELECT * FROM foo ORDER BY col1 DESC LIMIT 10;
+50
+49
+48
+47
+46
+45
+44
+43
+42
+41
+sqlite> .mode table 
+sqlite> INSERT INTO foo (col1) VALUE (71), (72);
+Error: near "VALUE": syntax error
+sqlite> INSERT INTO foo (col1) VALUES (71), (72);
+sqlite> SELECT * FROM foo ORDER BY col1 DESC LIMIT 10;
++------+
+| col1 |
++------+
+| 72   |
+| 71   |
+| 50   |
+| 49   |
+| 48   |
+| 47   |
+| 46   |
+| 45   |
+| 44   |
+| 43   |
++------+
+sqlite> 
+  [Restored Apr 12, 2024 at 2:00:58 PM]
+Last login: Fri Apr 12 14:00:58 on ttys001
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % pwd
+/Users/andrewtownsend/Desktop/SJSU/CS157b/CS157b_HW4
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % ls -la
+total 80
+drwxr-xr-x   7 andrewtownsend  staff   224 Apr 12 13:01 .
+drwxr-xr-x@ 10 andrewtownsend  staff   320 Apr 12 12:22 ..
+-rw-r--r--   1 andrewtownsend  staff  8192 Apr 12 12:44 db.db
+-rw-r--r--   1 andrewtownsend  staff  4616 Apr 12 12:48 db.db-journal
+-rw-r--r--   1 andrewtownsend  staff  4616 Apr 12 13:01 db.db-journal-copy
+-rw-r--r--   1 andrewtownsend  staff  8192 Apr 12 12:46 db1.sqlite
+-rw-r--r--   1 andrewtownsend  staff  8192 Apr 12 12:53 db2.sqlite
+(base) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % conda deactivate 
+andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % pyenv activate leetcode 
+pyenv-virtualenv: prompt changing will be removed from future release. configure `export PYENV_VIRTUALENV_DISABLE_PROMPT=1' to simulate the behavior.
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % sqlite3 db.db
+SQLite version 3.36.0 2021-06-18 18:58:49
+Enter ".help" for usage hints.
+sqlite> END TRANSACTION 
+   ...> ;
+Error: cannot commit - no transaction is active
+sqlite> SELECT * FROM foo ORDER BY col1 DESC LIMIT 10;
+100
+99
+98
+97
+96
+95
+94
+93
+92
+91
+sqlite> .exit 
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % ls
+db.db			db.db-journal		db.db-journal-copy	db1.sqlite		db2.sqlite
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % rm db.db-journal
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % sqlite3 db.db
+SQLite version 3.36.0 2021-06-18 18:58:49
+Enter ".help" for usage hints.
+sqlite> BEGIN TRANSACTION;
+sqlite> DELETE FROM foo WHERE col1 > 50;
+sqlite> END TRANSACTION;
+sqlite> ROLLBACK;
+Error: cannot rollback - no transaction is active
+sqlite> SELECT * FROM foo ORDER BY col1 DESC LIMIT 10;
+50
+49
+48
+47
+46
+45
+44
+43
+42
+41
+sqlite> DELETE FROM foo;
+sqlite> SELECT * FROM foo ORDER BY col1 DESC LIMIT 10;
+sqlite> BEGIN TRANSACTION;
+sqlite> END TRANSACTION;
+sqlite> INSERT INTO foo (col1) VALUES (1), (2), (3), (4), (5), (6), (7), (8), (9), (10), (11), (12), (13), (14), (15), (16), (17), (18), (19), (20), (21), (22), (23), (24), (25), (26), (27), (28), (29), (30), (31), (32), (33), (34), (35), (36), (37), (38), (39), (40), (41), (42), (43), (44), (45), (46), (47), (48), (49), (50), (51), (52), (53), (54), (55), (56), (57), (58), (59), (60), (61), (62), (63), (64), (65), (66), (67), (68), (69), (70), (71), (72), (73), (74), (75), (76), (77), (78), (79), (80), (81), (82), (83), (84), (85), (86), (87), (88), (89), (90), (91), (92), (93), (94), (95), (96), (97), (98), (99), (100);
+sqlite> BEGIN TRANSACTION;                                                                                                    sqlite> DELETE FROM foo WHERE col1 > 50;
+sqlite> ROLLBACK;
+sqlite> .exit 
+(leetcode) andrewtownsend@Andrews-MacBook-Air CS157b_HW4 % 
+
